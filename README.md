@@ -20,6 +20,7 @@ For NixOS, use the [NixPkg](https://github.com/NixOS/nixpkgs/blob/master/pkgs/ap
 
 ## Usage
 
+- `--lang` - to change the language, defaults to `en`
 - `--ampm` - display time in AM/PM format
 - `--location` - pass a specific location to wttr.in
 - `--main-indicator` - decide which [`current_conditions` key](https://wttr.in/?format=j1) will be shown on waybar. defaults to `temp_C`
@@ -27,7 +28,7 @@ For NixOS, use the [NixPkg](https://github.com/NixOS/nixpkgs/blob/master/pkgs/ap
 - `--hide-conditions` - show a shorter descrpition next to each hour, like `7° Mist` instead of `7° Mist, Overcast 81%, Sunshine 17%, Frost 15%`
 - `--fahrenheit` - use fahrenheit instead of celsius
 
-e.g. `wttrbar --date-format "%m/%d" --location Paris --hide-conditions`
+e.g. `wttrbar --lang fr --date-format "%m/%d" --location Paris --hide-conditions`
 
 ## Waybar configuration
 
