@@ -1,0 +1,11 @@
+{
+  // See: https://wttr.in/:translation
+  "LANG": "en",
+  "FEELS_LIKE": "Feels like",
+  "WIND": "Wind",
+  "HUMIDITY": "Humidity",
+  "TODAY": "Today",
+  "TOMORROW": "Tomorrow",
+  "AM": "am",
+  "PM": "pm"
+}
