@@ -93,10 +93,25 @@ fn main() {
 
     let mut data = HashMap::new();
 
-    let weather_url = if location.is_empty() {
-        "https://wttr.in/?format=j1".to_string()
+
+    let lang = match args.iter().position(|arg| arg == "--lang") {
+        Some(index) => args.get(index + 1).unwrap(),
+        None => "en",
+    };
+    
+    // defaults to weatherDesc, if lang is not en: lang_{lang} adn cast back to &str
+    let weather_desc_key: String = if lang == "en" {
+        "weatherDesc".to_string()
     } else {
-        format!("https://wttr.in/{}?format=j1", location)
+        format!("lang_{lang}", lang=lang)
+    };
+
+    let weather_desc_key: &str = weather_desc_key.as_str();
+
+    let weather_url = if location.is_empty() {
+        format!("https://wttr.in/?format=j1&lang={lang}", lang=lang)
+    } else {
+        format!("https://wttr.in/{location}?format=j1&lang={lang}", lang=lang,location=location)
     };
 
     let weather_result = get(weather_url);
@@ -145,7 +160,7 @@ fn main() {
 
     let mut tooltip = format!(
         "<b>{}</b> {}°\n",
-        current_condition["weatherDesc"][0]["value"]
+        current_condition[weather_desc_key][0]["value"]
             .as_str()
             .unwrap(),
         if fahrenheit {
@@ -218,7 +233,7 @@ fn main() {
                 } else {
                     format_temp(hour["FeelsLikeC"].as_str().unwrap())
                 },
-                hour["weatherDesc"][0]["value"].as_str().unwrap(),
+                hour[weather_desc_key][0]["value"].as_str().unwrap(),
             );
             if !hide_conditions {
                 tooltip_line += format!(", {}", format_chances(hour)).as_str();
